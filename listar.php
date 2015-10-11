@@ -10,26 +10,6 @@ session_start();
       <title>Listado de películas</title>
    </head>
    <body>
-
-      <nav class="navbar navbar-default" role="navigation">
-         <div>
-            <ul class="nav navbar-nav">
-               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menú<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                     <li><a href="listar.php">Listar</a></li>
-                     <li><a href="cerrar-sesion.php">Cerrar sesión</a></li>
-                  </ul>
-               </li>
-            </ul>
-         </div>
-      </nav>
-
-      <div class="page-header">
-         <h1 class="text-center">Listado de películas</h1>
-      </div>
-
-      <div class="container">
       <?php
       if( $_SESSION['usuario'] != 'chiwy' OR empty($_SESSION['usuario']) ){
          echo '<div class="alert alert-danger">'.
@@ -37,7 +17,25 @@ session_start();
                '</div>';
          header("refresh:3,url=login.php");
          exit();
-      }else{
+      }
+      ?>
+      
+      <!-- Menú lateral -->
+      <aside class="col col-lg-2 col-md-2 col-sm-1 col-xs-12">
+         <h3>Menú</h3>
+         <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active"><a href="listar.php">Listar</a></li>
+            <li role="presentation"><a href="cerrar-sesion.php">Cerrar sesión</a></li>
+         </ul>
+      </aside>
+
+      <!-- Contenido del listado de películas -->
+      <div class="col col-lg-10 col-md-10 col-sm-11 col-xs-12" id="content">
+         <div class="page-header">
+            <h1 class="text-center">Listado de películas</h1>
+         </div>
+
+         <?php
          require_once('Database.php');
 
          $link = Database::conectar();
@@ -50,8 +48,7 @@ session_start();
          }
          echo '</table>';
          $link = Database::desconectar();
-      }
-      ?>
+         ?>
       </div>
 
       <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
