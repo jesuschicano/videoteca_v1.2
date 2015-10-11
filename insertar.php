@@ -39,19 +39,19 @@ session_start();
          <form method="post">
             <div class="form-group">
                <label for="inputTitle">Título</label>
-               <input type="text" class="form-control" name="inputTitle">
+               <input type="text" class="form-control" name="inputTitle" required="">
             </div>
             <div class="form-group">
                <label for="inputYear">Año</label>
-               <input type="number" class="form-control" name="inputYear" min="1900" max="2099">
+               <input type="number" class="form-control" name="inputYear" min="1900" max="2099" required="">
             </div>
             <div class="form-group">
                <label for="inputDuration">Duración</label>
-               <input type="number" class="form-control" name="inputTitle" min="1" max="999">
+               <input type="number" class="form-control" name="inputDuration" min="1" max="999" required="">
             </div>
             <div class="form-group">
                <label for="inputDirector">Director</label>
-               <input type="text" class="form-control" name="inputDirector">
+               <input type="text" class="form-control" name="inputDirector" required="">
             </div>
             <div class="form-group">
                <label for="inputTitle">Título</label>
@@ -77,6 +77,9 @@ session_start();
                   <option value="21">Histórica</option>
                </select>
             </div>
+            <div class="form-group">
+               <button type="submit" class="btn btn-default" name="btnAdd">Insertar</button>
+            </div>
          </form>
       </div>
 
@@ -86,8 +89,15 @@ session_start();
 <?php
 require_once('Database.php');
 
-$link = Database::conectar();
-$consulta = 'SELECT * FROM PELICULAS ORDER BY titulo ASC';
+if( isset($_POST['btnAdd']) ){
+   $titulo = $_POST['inputTitle'];
+   $duracion = $_POST['inputDuration'];
+   $anno = $_POST['inputYear'];
+   $director = $_POST['inputDirector'];
+   $genero = $_POST['selectGen'];
 
-$link = Database::desconectar();
+   $link = Database::conectar();
+   $link = Database::insertaPeli($titulo,$anno,$duracion,$director,$genero);
+   $link = Database::desconectar();
+}
 ?>

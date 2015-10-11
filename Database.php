@@ -44,5 +44,22 @@ class Database{
       }
    }// end verificaUsuario
 
+   public static function insertaPeli($titulo,$anno,$duracion,$director,$genero){
+      try {
+         $datos = array('titulo'=>$titulo, 'year'=>$anno, 'duracion'=>$duracion, 'director'=>$director, 'id_genero'=>$genero);
+
+         $q = self::$cont->prepare('INSERT INTO PELICULAS (titulo,year,duracion,director,id_genero) VALUES (:titulo,:year,:duracion,:director,:id_genero)');
+         $q->execute($datos);
+
+         if( $q->rowCount() == 1 ){
+            echo '<script>'.
+                     'alert("Película insertada correctamente.");'.
+                  '</script>';
+         }
+      } catch (PDOException $e) {
+         echo $e->getMessage();
+      }
+   }// end insertaPeli
+
 }// end class
 ?>
