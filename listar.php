@@ -19,18 +19,19 @@ session_start();
          exit();
       }
       ?>
-      
+
       <!-- Menú lateral -->
-      <aside class="col col-lg-2 col-md-2 col-sm-1 col-xs-12">
+      <aside class="col col-lg-2 col-md-2 col-sm-12 col-xs-12">
          <h3>Menú</h3>
          <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="active"><a href="listar.php">Listar</a></li>
+            <li role="presentation"><a href="insertar.php">Insertar</a></li>
             <li role="presentation"><a href="cerrar-sesion.php">Cerrar sesión</a></li>
          </ul>
       </aside>
 
       <!-- Contenido del listado de películas -->
-      <div class="col col-lg-10 col-md-10 col-sm-11 col-xs-12" id="content">
+      <div class="col col-lg-10 col-md-10 col-sm-12 col-xs-12" id="content">
          <div class="page-header">
             <h1 class="text-center">Listado de películas</h1>
          </div>
