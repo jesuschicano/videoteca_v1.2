@@ -11,7 +11,7 @@ session_start();
    </head>
    <body>
       <?php
-      if( $_SESSION['usuario'] != 'chiwy' OR empty($_SESSION['usuario']) ){
+      if( !isset($_SESSION['usuario']) ){
          echo '<div class="alert alert-danger">'.
                   '<a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error:</strong> No tiene permisos para estar aquí.'.
                '</div>';
@@ -26,6 +26,7 @@ session_start();
          <ul class="nav nav-pills nav-stacked">
             <li role="presentation"><a href="listar.php">Listar</a></li>
             <li role="presentation" class="active"><a href="insertar.php">Insertar</a></li>
+            <li role="presentation"><a href="buscar.php">Buscar</a></li>
             <li role="presentation"><a href="cerrar-sesion.php">Cerrar sesión</a></li>
          </ul>
       </aside>
