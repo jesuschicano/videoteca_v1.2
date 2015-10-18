@@ -37,9 +37,40 @@ session_start();
             <h1 class="text-center">Búsqueda avanzada</h1>
          </div>
 
+         <!-- formulario buscar por titulo -->
+         <h3>Búsqueda por título</h3>
+         <form method="post" class="form-inline">
+            <div class="form-group">
+               <label for="inputTitulo">Título</label>
+               <input type="search" name="inputTitulo" id="jetsSearchTitle">
+            </div>
+         </form>
 
+         <table class="table table-condensed">
+            <tbody id="jetsContent">
+               <th>TÍTULO</th><th>AÑO</th><th>DURACIÓN</th><th>DIRECTOR</th>
+               <?php
+               require_once('Database.php');
+
+               $link = Database::conectar();
+               $consulta = 'SELECT * FROM PELICULAS ORDER BY titulo ASC';
+               foreach ($link->query($consulta) as $row) {
+                  echo '<tr><td>'.$row['titulo'].'</td><td>'.$row['year'].'</td><td>'.$row['duracion'].'</td><td>'.$row['director'].'</td></tr>';
+               }
+               $link = Database::desconectar();
+               ?>
+            </tbody>
+         </table>
       </div>
 
       <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/jets/jets.min.js"></script>
+      <script>
+         var jets = new Jets({
+            searchTag: '#jetsSearchTitle',
+            contentTag: '#jetsContent',
+            columns: [0]
+         });
+      </script>
    </body>
 </html>
