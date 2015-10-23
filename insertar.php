@@ -27,6 +27,7 @@ session_start();
             <li role="presentation"><a href="listar.php">Listar</a></li>
             <li role="presentation" class="active"><a href="insertar.php">Insertar</a></li>
             <li role="presentation"><a href="buscar.php">Buscar</a></li>
+            <li role="presentation"><a href="aleatorio.php">Lotería</a></li>
             <li role="presentation"><a href="cerrar-sesion.php">Cerrar sesión</a></li>
          </ul>
       </aside>

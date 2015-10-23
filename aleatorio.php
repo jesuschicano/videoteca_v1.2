@@ -7,7 +7,7 @@ session_start();
       <meta charset="utf-8">
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
       <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
-      <title>Listado de películas</title>
+      <title>Lotería de películas</title>
    </head>
    <body>
       <?php
@@ -24,10 +24,10 @@ session_start();
       <aside class="col col-lg-2 col-md-2 col-sm-12 col-xs-12">
          <h3>Menú</h3>
          <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active"><a href="listar.php">Listar</a></li>
+            <li role="presentation"><a href="listar.php">Listar</a></li>
             <li role="presentation"><a href="insertar.php">Insertar</a></li>
             <li role="presentation"><a href="buscar.php">Buscar</a></li>
-            <li role="presentation"><a href="aleatorio.php">Lotería</a></li>
+            <li role="presentation" class="active"><a href="aleatorio.php">Lotería</a></li>
             <li role="presentation"><a href="cerrar-sesion.php">Cerrar sesión</a></li>
          </ul>
       </aside>
@@ -35,23 +35,31 @@ session_start();
       <!-- Contenido del listado de películas -->
       <div class="col col-lg-10 col-md-10 col-sm-12 col-xs-12" id="content">
          <div class="page-header">
-            <h1 class="text-center">Listado de películas</h1>
+            <h1 class="text-center">Lotería de películas</h1>
          </div>
 
-         <?php
-         require_once('Database.php');
+         <div class="row">
+            <div class="jumbotron text-center">
+               <form action="#" method="POST">
+                  <input type="submit" class="btn btn-success" name="btn_loteria" value="Probar suerte">
+               </form>
+               <?php
+               require_once("Database.php");
 
-         $link = Database::conectar();
-         $consulta = 'SELECT * FROM PELICULAS ORDER BY titulo ASC';
+               if( isset($_POST["btn_loteria"]) ){
+                  $link = Database::conectar();
 
-         echo '<table class="table table-condensed">';
-         echo '<th>TÍTULO</th><th>AÑO</th><th>DURACIÓN</th><th>DIRECTOR</th>';
-         foreach ($link->query($consulta) as $row) {
-            echo '<tr><td>'.$row['titulo'].'</td><td>'.$row['year'].'</td><td>'.$row['duracion'].'</td><td>'.$row['director'].'</td></tr>';
-         }
-         echo '</table>';
-         $link = Database::desconectar();
-         ?>
+                  $consulta = 'SELECT * FROM PELICULAS ORDER BY RAND() LIMIT 1';
+                  echo '<div class="page-header">';
+                  foreach ($link->query($consulta) as $row) {
+                     echo '<h4 class="text-success">'.$row['titulo'].'</h4>';
+                  }
+                  echo '</div>';
+                  $link = Database::desconectar();
+               }
+               ?>
+            </div>
+         </div>
       </div>
 
       <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
