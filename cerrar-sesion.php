@@ -8,5 +8,10 @@ session_destroy();
 echo "<h3>Se ha cerrado la sesión. Será redirigido.</h3>";
 
 // volver a la pantalla de login
-header("refresh:3, url=login.php");
+echo "<script>
+   function redirecciona()
+      window.location = 'login.php';
+
+   setTimeout(redirecciona,3000);
+</script>";
 ?>

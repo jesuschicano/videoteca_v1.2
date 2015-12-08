@@ -28,6 +28,14 @@ require_once('Database.php');
       </div>
       <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
    </body>
+   <script type="text/javascript">
+      function redireccionaError(){
+         window.location = "login.php";
+      }
+      function redireccionaOk(){
+         window.location = "listar.php";
+      }
+   </script>
 </html>
 <?php
 if( isset($_POST['btnSubmit']) ){
@@ -42,11 +50,11 @@ if( isset($_POST['btnSubmit']) ){
    $link = Database::desconectar();
 
    if( $_SESSION['usuario'] != 'chiwy' ){
-      echo "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Error:</strong> usuario no encontrado</div>";
-      header("refresh:3;url=login.php");
+      echo "<div class='alert alert-danger'><a href='#' data-dismiss='alert'>&times;</a><strong>Error:</strong> usuario no encontrado</div>";
+      echo "<script>window.setTimeout(redireccionaError,3000);</script>";
    }else{
-      echo "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Usuario correcto.</strong> Será redirigido.</div>";
-      header("refresh:3;url=listar.php");
+      echo "<div class='alert alert-success'><a href='#' data-dismiss='alert'>&times;</a><strong>Usuario correcto.</strong> Será redirigido.</div>";
+      echo "<script>window.setTimeout(redireccionaOk,3000);</script>";
    }
 }
 ?>
